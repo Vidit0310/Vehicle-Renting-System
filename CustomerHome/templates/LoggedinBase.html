@@ -75,7 +75,7 @@
                             <div class="form-check">
                                 <input type="radio" name="vechile_type" {% if selected == 'all' %}checked{% endif %} class="form-check-input vechile_type" id="All"
                                     value="All">
-                                <label class="form-check-label" for="Car">All</label>
+                                <label class="form-check-label" for="All">All</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="vechile_type" {% if selected == 'Car' %}checked{% endif %} class="form-check-input vechile_type" id="Car"
@@ -104,8 +104,8 @@
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="vechile_type" {% if selected == 'Van' %}checked{% endif %} class="form-check-input vechile_type"
-                                    id="TouristVan" value="Van">
-                                <label class="form-check-label" for="TouristVan">Tourist Van</label>
+                                    id="Van" value="Van">
+                                <label class="form-check-label" for="Van">Tourist Van</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="vechile_type" {% if selected == 'Truck' %}checked{% endif %} class="form-check-input vechile_type" id="Truck"
@@ -151,6 +151,11 @@
                                     <input type="radio" name="vechile_company" value="tesla"
                                         class="form-check-input vechile_company" id="Tesla">
                                     <label class="form-check-label" for="Tesla">Tesla</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="Ford"
+                                        class="form-check-input vechile_company" id="ford">
+                                    <label class="form-check-label" for="ford">Ford</label>
                                 </div>
                             </div>
 
