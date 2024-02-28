@@ -125,11 +125,34 @@ def Logout(request):
 def Home(request):
     if('user_email' not in request.session):
         return redirect('/signin/')
+        
+    elif request.method == 'POST':
+        print("--------------------------------POST")
+        vehicle_type = request.POST.get('vechile_type_selected', None)
+        print(vehicle_type)
+        company = request.POST.get('vechile_company_selected', None)
+        print(company)
+
+        if vehicle_type:
+            vehicle = Vehicle.objects.filter(Vehicle_type=vehicle_type)
+            selected = vehicle_type
+        elif company:
+            vehicle = Vehicle.objects.filter(Vehicle_company=company)
+            selected = company
+        if vehicle_type=="All":
+            vehicle = Vehicle.objects.all()
+            selected = 'all'
+    else:
+        vehicle = Vehicle.objects.all()
+        selected = 'all'
+
+
     customer_email = request.session.get('user_email')
     customer = Customer.objects.get(customer_email=customer_email)
-    vehicle = Vehicle.objects.all()
     Message="Welcome Aboard!!"
-    return render(request,'Home.html',{'vehicle':vehicle,'Message':Message,'customer':customer})
+    
+
+    return render(request,'Home.html',{'vehicle':vehicle,'Message':Message,'customer':customer, 'selected':selected})
 
 def Profile(request):
     if('user_email' not in request.session):

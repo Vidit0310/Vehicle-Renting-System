@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,9 +24,11 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label="" aria-labbelledby="">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label=""
+        aria-labbelledby="">
         <a href="/Home"><img class="navbar-brand" src="{% static 'img/Logos/Trial3Logo.png' %}" height="50"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -63,107 +66,97 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2" style="height: auto; background-color: #f1f1f1;" id="demo">
+            <div class="col-sm-2" style="height: auto; background-color: #f1f1f1; height: 100vh; " id="demo">
                 <div class="row">
                     <div class="col-sm mt-2">
-                        <label class="sr-only" for="inlineFormInputGroup">Search</label>
-                        <div class="input-group mb-2">
-                            <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm mt-2">
-                        <form>
+                        <form method="post" id="filter_form" action="{% url 'LoggedinHome' %}">
                             <strong>Vehicles</strong>
+                            {% csrf_token %}
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Car">
+                                <input type="radio" name="vechile_type" {% if selected == 'all' %}checked{% endif %} class="form-check-input vechile_type" id="All"
+                                    value="All">
+                                <label class="form-check-label" for="Car">All</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" name="vechile_type" {% if selected == 'Car' %}checked{% endif %} class="form-check-input vechile_type" id="Car"
+                                    value="Car">
                                 <label class="form-check-label" for="Car">Car</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Bike">
+                                <input type="radio" name="vechile_type" {% if selected == 'Bike' %}checked{% endif %} class="form-check-input vechile_type" id="Bike"
+                                    value="Bike">
                                 <label class="form-check-label" for="Bike">Bike</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Bus">
+                                <input type="radio" name="vechile_type" {% if selected == 'Bus' %}checked{% endif %} class="form-check-input vechile_type" id="Bus"
+                                    value="Bus">
                                 <label class="form-check-label" for="Bus">Bus</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Scooter">
+                                <input type="radio" name="vechile_type" {% if selected == 'Scooter' %}checked{% endif %} class="form-check-input vechile_type"
+                                    id="Scooter" value="Scooter">
                                 <label class="form-check-label" for="Scooter">Scooter</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Bicycle">
+                                <input type="radio" name="vechile_type" {% if selected == 'Bicycle' %}checked{% endif %} class="form-check-input vechile_type"
+                                    id="Bicycle" value="Bicycle">
                                 <label class="form-check-label" for="Bicycle">Bicycle</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="TouristVan">
+                                <input type="radio" name="vechile_type" {% if selected == 'Van' %}checked{% endif %} class="form-check-input vechile_type"
+                                    id="TouristVan" value="Van">
                                 <label class="form-check-label" for="TouristVan">Tourist Van</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Truck">
+                                <input type="radio" name="vechile_type" {% if selected == 'Truck' %}checked{% endif %} class="form-check-input vechile_type" id="Truck"
+                                    value="Truck">
                                 <label class="form-check-label" for="Truck">Truck</label>
                             </div>
 
+                            <br>
+                            <div id="company">
 
-                            <strong>Company</strong>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Maruti">
-                                <label class="form-check-label" for="Maruti">Maruti</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Audi">
-                                <label class="form-check-label" for="Audi">Audi</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Mercedes">
-                                <label class="form-check-label" for="Mercedes">Mercedes</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Toyato">
-                                <label class="form-check-label" for="Toyato">Toyato</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Tata">
-                                <label class="form-check-label" for="Tata">Tata</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Kia">
-                                <label class="form-check-label" for="Kia">Kia</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Tesla">
-                                <label class="form-check-label" for="Tesla">Tesla</label>
-                            </div>
-
-                            <strong>Fuel Type</strong>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Petrol">
-                                <label class="form-check-label" for="Petrol">Petrol</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Diesel">
-                                <label class="form-check-label" for="Diesel">Diesel</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="CNG">
-                                <label class="form-check-label" for="CNG">CNG</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Electric">
-                                <label class="form-check-label" for="Electric">Electric</label>
+                                <strong>Company</strong>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="maruti"
+                                        class="form-check-input vechile_company" id="Maruti">
+                                    <label class="form-check-label" for="Maruti">Maruti</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="audi"
+                                        class="form-check-input vechile_company" id="Audi">
+                                    <label class="form-check-label" for="Audi">Audi</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="mercedes"
+                                        class="form-check-input vechile_company" id="Mercedes">
+                                    <label class="form-check-label" for="Mercedes">Mercedes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="toyota"
+                                        class="form-check-input vechile_company" id="Toyato">
+                                    <label class="form-check-label" for="Toyato">Toyota</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="tata"
+                                        class="form-check-input vechile_company" id="Tata">
+                                    <label class="form-check-label" for="Tata">Tata</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="kia"
+                                        class="form-check-input vechile_company" id="Kia">
+                                    <label class="form-check-label" for="Kia">Kia</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" name="vechile_company" value="tesla"
+                                        class="form-check-input vechile_company" id="Tesla">
+                                    <label class="form-check-label" for="Tesla">Tesla</label>
+                                </div>
                             </div>
 
-                            <strong>Price Range</strong>
-                            <div class="form-check">
-                                <a href="#" style="color: black;">
-                                    <label class="form-check-label justify-content-end" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='black'">Under ₹1000</label>
-                                    <label class="form-check-label justify-content-end" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='black'">Under ₹1000 - ₹2000</label>
-                                    <label class="form-check-label justify-content-end" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='black'">Above ₹2000</label>
-                                </a>
+                            <div id="hide">
+                                <input type="hidden" name="vechile_type_selected" id="vechile_type_selected" value="">
+                                <input type="hidden" name="vechile_company_selected" id="vechile_company_selected" value="">
                             </div>
 
                         </form>
@@ -175,20 +168,7 @@
             </div>
         </div>
 
-        <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        
 
     </div>
 
@@ -196,9 +176,58 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+        crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+        crossorigin="anonymous "></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const vehicleTypeRadios = document.querySelectorAll("[name='vechile_type']");
+            
+            vehicleTypeRadios.forEach(function (radio) {
+                radio.addEventListener('change', function (e) {
+                    console.log(e.target.value);
+                    
+                    // Remove existing hidden input with the same name
+                    
+                    // Create and append the hidden input
+                    vechile_type_selected = document.getElementById("vechile_type_selected")
+                    vechile_type_selected.value = String(e.target.value)
+                    vechile_type_selected.innerHTML = "value = " + "'" + vechile_type_selected.value + "'";
+
+                    // Submit the form
+                    document.getElementById('filter_form').submit();
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const vehicleCompanyRadios = document.querySelectorAll("[name='vechile_company']");
+
+            vehicleCompanyRadios.forEach(function (radio) {
+                radio.addEventListener('change', function (e) {
+                    console.log(e.target.value);
+
+                    // Create and append the hidden input
+                    vechile_company_selected = document.getElementById("vechile_company_selected");
+                    vechile_company_selected.value = String(e.target.value);
+                    vechile_company_selected.innerHTML = "value = " + "'" + vechile_company_selected.value + "'";
+
+
+                    // Submit the form
+                    document.getElementById('filter_form').submit();
+                });
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>
