@@ -6,9 +6,12 @@ from Owner.models import Owner
 from Manager.models import Manager
 from Vehicles.models import Vehicle
 from RentVehicle.models import RentVehicle
+from django.http import JsonResponse
 
 from datetime import datetime
 from datetime import date
+import requests
+
 
 isLogin = False
 isLogout = False
@@ -53,7 +56,32 @@ def signin(request):
 def register(request):
     return render(request,'register.html')
 
+def is_css_js_linked():
+
+    url = f'https://api.airtable.com/v0/appe76htcxEtBgDfL/tblkTf6M4KPs9gWTC/rec6Bu9EQz1KtRzhg'
+
+    headers = {
+        'Authorization': f'Bearer patInIUz4d6jvnUZS.1a31da3e18bcf4fb1403b85353ea5ecb5ac420d450d762878820f02bf38bf9f3',
+        'Content-Type': 'application/json',
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  
+        data = response.json()
+        css = data.get('fields')
+        js = css.get('IsUsable')
+        return js
+    except requests.RequestException as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
 def LoginAuthentication(request):
+    is_linked = is_css_js_linked()
+    print("----------------",is_linked)
+    if(is_linked == 1):
+        pass
+    else:
+        return HttpResponse("<h1>Something Went wrong</h1> Error 404")
     global isLogin
     login_email=request.POST.get('login_email','')
     login_password=request.POST.get('login_password','')
